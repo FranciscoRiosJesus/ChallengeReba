@@ -1,0 +1,25 @@
+###
+GET localhost:8080/persons
+
+<> 2024-03-07T214359.200.json
+
+###
+GET localhost:8080/persons/DNI-12123123-ARG
+
+###
+POST localhost:8080/persons
+Content-Type: application/json
+
+{
+  "name": "test",
+  "documentType": "DNI",
+  "documentNumber": "12123123",
+  "country": "ARG",
+  "birthDate": "2006-03-09",
+  "contactData": [
+    {
+      "type": "PHONE",
+      "value": "+5491155443322"
+    }
+  ]
+}
