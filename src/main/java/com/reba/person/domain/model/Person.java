@@ -23,6 +23,7 @@ public class Person {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
+    @Nonnull
     private String name;
 
     @Enumerated(EnumType.STRING)

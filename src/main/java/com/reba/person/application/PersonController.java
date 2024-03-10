@@ -26,7 +26,7 @@ public class PersonController {
     // Endpoint to retrieve a person by ID
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPersonById(@PathVariable String id) {
-        Person person = personService.getPersonById(id);
+        Person person = personService.getPersonById(UUID.fromString(id));
         if (person != null) {
             return ResponseEntity.ok(person);
         } else {
@@ -52,10 +52,28 @@ public class PersonController {
         }
     }
 
+    // Endpoint to update an existing person
+    @PatchMapping("/{id}")
+    public ResponseEntity<Person> patchPerson(@PathVariable UUID id, @RequestBody Person person) {
+        Person updatedPerson = personService.patchPerson(id, person);
+        if (updatedPerson != null) {
+            return ResponseEntity.ok(updatedPerson);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Endpoint to delete a person
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePerson(@PathVariable String id) {
+    public ResponseEntity<Void> deletePerson(@PathVariable UUID id) {
         personService.deletePerson(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //Seed endpoint
+    @PostMapping("/seed")
+    public ResponseEntity<List<Person>> seed() {
+        List<Person> persons = personService.seed();
+        return ResponseEntity.ok(persons);
     }
 }
