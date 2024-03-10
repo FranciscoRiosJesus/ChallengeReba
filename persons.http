@@ -4,7 +4,7 @@ GET localhost:8080/persons
 <> 2024-03-07T214359.200.json
 
 ###
-GET localhost:8080/persons/DNI-12123123-ARG
+GET localhost:8080/persons/c59e582b-7cc4-4362-829c-7ae869b98e72
 
 ###
 POST localhost:8080/persons
@@ -13,7 +13,7 @@ Content-Type: application/json
 {
   "name": "test",
   "documentType": "DNI",
-  "documentNumber": "12123123",
+  "documentNumber": "12123458",
   "country": "ARG",
   "birthDate": "2006-03-09",
   "contactData": [
@@ -23,3 +23,38 @@ Content-Type: application/json
     }
   ]
 }
+
+###
+PUT localhost:8080/persons/c59e582b-7cc4-4362-829c-7ae869b98e71
+Content-Type: application/json
+
+{
+  "name": "Update test",
+  "birthDate": "2000-03-09"
+}
+
+###
+PATCH localhost:8080/persons/901d4a0d-4c04-424f-b1ef-a215679debbb
+Content-Type: application/json
+
+{
+  "name": "Update test"
+}
+
+###
+DELETE localhost:8080/persons/901d4a0d-4c04-424f-b1ef-a215679debbb
+
+###
+POST localhost:8080/persons/seed
+
+###
+POST localhost:8080/persons/e9d1bd3f-11e6-47e8-b5f0-81ffcf96638a/parent/eb02b2f4-caa0-4c84-ad1f-205fe084cee9
+
+###
+GET localhost:8080/relations/e148200a-b66a-4cc1-b93e-d575cdd13d3a/4c60376f-9f97-4ed8-8879-8f7beb2f9bcd
+
+###
+POST localhost:8080/relations/seed
+
+###
+GET localhost:8080/stats
