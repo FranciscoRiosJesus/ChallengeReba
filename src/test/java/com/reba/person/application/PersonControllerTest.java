@@ -15,7 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,8 +51,8 @@ class PersonControllerTest {
     @Test
     public void testGetAllPersons() throws Exception {
         List<Person> mockPersons = List.of(
-                new Person(null, "John", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, LocalDate.parse("2006-03-09"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322"))),
-                new Person(null, "Jane", DocumentTypeEnum.CI, "9876543210", CountryEnum.USA, LocalDate.parse("2003-04-10"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+14155556666")))
+                new Person(null, "John", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, Date.from(LocalDate.parse("2006-03-09").atStartOfDay(ZoneId.systemDefault()).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322"))),
+                new Person(null, "Jane", DocumentTypeEnum.CI, "9876543210", CountryEnum.USA, Date.from(LocalDate.parse("2003-04-10").atStartOfDay(ZoneId.systemDefault()).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+14155556666")))
         );
         when(personService.getAllPersons()).thenReturn(mockPersons);
 
@@ -61,7 +66,7 @@ class PersonControllerTest {
 
     @Test
     public void testGetPersonById() throws Exception {
-        var mockPerson = new Person(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"), "Jorge", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, LocalDate.parse("2006-03-09"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
+        var mockPerson = new Person(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"), "Jorge", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, Date.from(LocalDate.parse("2006-03-09").atStartOfDay(ZoneId.systemDefault()).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
         when(personService.getPersonById(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"))).thenReturn(mockPerson);
 
         mockMvc.perform(get("/persons/2a752c82-6019-4c14-a24d-43aa17a5a18f"))
@@ -82,7 +87,7 @@ class PersonControllerTest {
 
     @Test
     public void testCreatePerson() throws Exception {
-        var newPerson = new Person(null, "Alice", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, LocalDate.parse("2006-03-09"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
+        var newPerson = new Person(null, "Alice", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, Date.from(LocalDate.parse("2006-03-09").atStartOfDay(ZoneId.systemDefault()).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
         when(personService.createPerson(newPerson)).thenReturn(newPerson);
 
         mockMvc.perform(get("/persons"))
@@ -91,12 +96,12 @@ class PersonControllerTest {
 
     @Test
     public void testUpdatePerson() throws Exception {
-        var updatedPerson = new Person(null, "Update Alice", null, null, null, LocalDate.parse("2000-03-09"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
+        var updatedPerson = new Person(null, "Update Alice", null, null, null, Date.from((OffsetDateTime.parse("2000-03-09T00:00:00Z", DateTimeFormatter.ISO_DATE_TIME)).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
         when(personService.updatePerson(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"), updatedPerson)).thenReturn(updatedPerson);
 
         mockMvc.perform(put("/persons/2a752c82-6019-4c14-a24d-43aa17a5a18f")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"Update Alice\",\"birthDate\":\"2000-03-09\", \"contactData\":[{\"type\":\"PHONE\",\"value\":\"+5491155443322\"}]}")
+                        .content("{\"name\":\"Update Alice\",\"birthDate\":\"2000-03-09T00:00:00Z\", \"contactData\":[{\"type\":\"PHONE\",\"value\":\"+5491155443322\"}]}")
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Update Alice"))
@@ -105,12 +110,12 @@ class PersonControllerTest {
 
     @Test
     public void testPatchPerson() throws Exception {
-        var updatedPerson = new Person(null, "Update Alice", null, null, null, LocalDate.parse("2000-03-09"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
+        var updatedPerson = new Person(null, "Update Alice", null, null, null, Date.from((OffsetDateTime.parse("2000-03-09T00:00:00Z", DateTimeFormatter.ISO_DATE_TIME)).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322")));
         when(personService.patchPerson(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"), updatedPerson)).thenReturn(updatedPerson);
 
         mockMvc.perform(patch("/persons/2a752c82-6019-4c14-a24d-43aa17a5a18f")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"Update Alice\",\"birthDate\":\"2000-03-09\", \"contactData\":[{\"type\":\"PHONE\",\"value\":\"+5491155443322\"}]}")
+                        .content("{\"name\":\"Update Alice\",\"birthDate\":\"2000-03-09T00:00:00Z\", \"contactData\":[{\"type\":\"PHONE\",\"value\":\"+5491155443322\"}]}")
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Update Alice"))

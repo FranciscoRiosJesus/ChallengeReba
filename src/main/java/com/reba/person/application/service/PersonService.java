@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.Period;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +44,7 @@ public class PersonService {
     }
 
     private boolean is18YearsOld(Person person) {
-        var period = Period.between(person.getBirthDate(), LocalDate.now());
+        var period = Period.between((person.getBirthDate()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
         return period.getYears() >= 18;
     }
 
@@ -100,7 +102,7 @@ public class PersonService {
                         DocumentTypeEnum.DNI,
                         "1234567890",
                         CountryEnum.ARG,
-                        LocalDate.of(1990, 1, 1),
+                        Date.from(LocalDate.of(1990, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
                         List.of(
                                 new ContactData(
                                         ContactDataTypeEnum.EMAIL,
@@ -118,7 +120,7 @@ public class PersonService {
                         DocumentTypeEnum.DNI,
                         "1234567891",
                         CountryEnum.BRA,
-                        LocalDate.of(1995, 1, 1),
+                        Date.from(LocalDate.of(1995, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
                         List.of(
                                 new ContactData(
                                         ContactDataTypeEnum.EMAIL,
@@ -136,7 +138,7 @@ public class PersonService {
                         DocumentTypeEnum.DNI,
                         "1234567892",
                         CountryEnum.USA,
-                        LocalDate.of(2000, 1, 1),
+                        Date.from(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
                         List.of(
                                 new ContactData(
                                         ContactDataTypeEnum.EMAIL,
@@ -154,7 +156,7 @@ public class PersonService {
                         DocumentTypeEnum.DNI,
                         "1234567893",
                         CountryEnum.ESP,
-                        LocalDate.of(2005, 1, 1),
+                        Date.from(LocalDate.of(2005, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
                         List.of(
                                 new ContactData(
                                         ContactDataTypeEnum.EMAIL,
@@ -172,7 +174,7 @@ public class PersonService {
                         DocumentTypeEnum.DNI,
                         "1234567894",
                         CountryEnum.ESP,
-                        LocalDate.of(2010, 1, 1),
+                        Date.from(LocalDate.of(2010, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
                         List.of(
                                 new ContactData(
                                         ContactDataTypeEnum.EMAIL,

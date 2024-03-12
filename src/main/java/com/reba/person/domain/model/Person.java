@@ -2,13 +2,13 @@ package com.reba.person.domain.model;
 
 import com.reba.person.domain.model.enums.CountryEnum;
 import com.reba.person.domain.model.enums.DocumentTypeEnum;
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,11 +19,11 @@ import java.util.UUID;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"documentType", "documentNumber", "country"}))
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Nonnull
+    @NonNull
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -34,11 +34,11 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private CountryEnum country;
 
-    @Nonnull
+    @NonNull
     @Temporal(TemporalType.DATE)
-    private LocalDate birthDate;
+    private Date birthDate;
 
-    @Nonnull
+    @NonNull
     @ElementCollection
     private List<ContactData> contactData;
 
