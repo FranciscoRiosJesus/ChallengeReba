@@ -21,6 +21,9 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'https://plugins.gradle.org/m2/'
+	}
 }
 
 ext {
@@ -36,6 +39,7 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.529')
 }
 
 tasks.named('test') {
