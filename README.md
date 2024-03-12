@@ -20,15 +20,11 @@
    ```bash
    gradle build
    ```
-4. Run up postgres container
-   ```bash
-   docker compose up -d
-   ```
-5. Run the application locally:
+4. Run the application locally:
   ```bash
-   java -jar build/libs/person-0.0.1-SNAPSHOT.war
+  java -jar build/libs/person-0.0.1-SNAPSHOT.war
   ```
-6. The application will be available at http://localhost:8080. You can test the endpoints by using the requests defined in the [persons.http](/persons.http) file. This file contains sample HTTP request that you can use to interact with the application's endpoints. 
+5. The application will be available at http://localhost:8080. You can test the endpoints by using the requests defined in the [persons.http](/persons.http) file. This file contains sample HTTP request that you can use to interact with the application's endpoints. 
 
 # Running Tests
 
