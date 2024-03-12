@@ -1,14 +1,10 @@
 package com.reba.person.domain.model;
 
 import com.reba.person.domain.model.enums.ContactDataTypeEnum;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Embeddable
 @Data

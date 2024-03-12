@@ -14,8 +14,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +42,7 @@ class PersonRelationServiceTest {
         when(personRelationRepository.save(any())).thenReturn(new PersonRelation(null, UUID.randomUUID(), UUID.randomUUID()));
         when(personRelationRepository.existsByParentIdAndChildId(any(), any())).thenReturn(false);
         when(personService.existsById(any())).thenReturn(true);
-        when(personService.getPersonById(any())).thenReturn(new Person(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"), "Juan", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, Date.from(LocalDate.parse("2006-03-09").atStartOfDay(ZoneId.systemDefault()).toInstant()), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322"))));
+        when(personService.getPersonById(any())).thenReturn(new Person(UUID.fromString("2a752c82-6019-4c14-a24d-43aa17a5a18f"), "Juan", DocumentTypeEnum.CI, "1234567890", CountryEnum.BRA, LocalDate.parse("2006-03-09"), List.of(new ContactData(ContactDataTypeEnum.PHONE, "+5491155443322"))));
 
         PersonRelation personRelation = personRelationService.setParentRelation(UUID.randomUUID(), UUID.randomUUID());
         assertNotNull(personRelation);
