@@ -9,7 +9,7 @@ import io.gatling.javaapi.http.*;
 public class PerformanceSimulation extends Simulation {
 
     HttpProtocolBuilder httpProtocol =
-            http.baseUrl("http://190.51.31.42:8080")
+            http.baseUrl("http://URL_PERSONS:8080")
                     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                     .acceptLanguageHeader("en-US,en;q=0.5")
                     .acceptEncodingHeader("gzip, deflate")
