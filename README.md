@@ -39,6 +39,7 @@
 
 To test the EC2 instance, you can use the `persons.http` file.
 
+## Performance Testing
 
 The performance testing code using Gatling is located in `PerformanceSimulation.java`. Follow these steps to run it:
 1. Make sure you have Gatling installed on your machine.
@@ -49,3 +50,8 @@ The performance testing code using Gatling is located in `PerformanceSimulation.
 Alternatively, you can also run the performance test using Gatling's online platform.
 
 For more information and documentation on Gatling, you can visit their website at [Gatling Documentation](https://gatling.io/docs/current/).
+
+## Populating the Database
+You can populate the database by running the following endpoints:
+- `persons/SEED`: Use this endpoint to populate the database with person data.
+- `relations/SEED`: Use this endpoint to populate the database with relationship data.
