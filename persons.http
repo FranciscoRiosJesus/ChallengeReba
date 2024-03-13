@@ -58,3 +58,65 @@ POST localhost:8080/relations/seed
 
 ###
 GET localhost:8080/stats
+
+###
+###  AWS EC2
+###
+GET ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons
+
+###
+GET ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons/c59e582b-7cc4-4362-829c-7ae869b98e72
+
+###
+POST ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons
+Content-Type: application/json
+
+{
+  "name": "test",
+  "documentType": "DNI",
+  "documentNumber": "12123458",
+  "country": "ARG",
+  "birthDate": "2006-03-09",
+  "contactData": [
+    {
+      "type": "PHONE",
+      "value": "+5491155443322"
+    }
+  ]
+}
+
+###
+PUT ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons/d4c6a0b7-96e9-452d-accb-323e7e67ef69
+Content-Type: application/json
+
+{
+  "name": "Update test",
+  "birthDate": "2000-03-09"
+}
+
+###
+PATCH ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons/d4c6a0b7-96e9-452d-accb-323e7e67ef69
+Content-Type: application/json
+
+{
+  "name": "Update test"
+}
+
+###
+DELETE ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons/d4c6a0b7-96e9-452d-accb-323e7e67ef69
+
+###
+POST ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons/seed
+
+###
+POST ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/persons/e9d1bd3f-11e6-47e8-b5f0-81ffcf96638a/parent/eb02b2f4-caa0-4c84-ad1f-205fe084cee9
+
+###
+GET ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/relations/e148200a-b66a-4cc1-b93e-d575cdd13d3a/4c60376f-9f97-4ed8-8879-8f7beb2f9bcd
+
+###
+POST ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/relations/seed
+
+###
+GET ec2-18-117-91-147.us-east-2.compute.amazonaws.com:8080/stats
+
